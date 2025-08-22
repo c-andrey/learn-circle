@@ -1,38 +1,39 @@
 version: "3.9"
 
 services:
-  web:
+  vue:
     build:
-      context: ../app-vue
+      context: ../
       dockerfile: infra/docker/vue/web.Dockerfile
-    container_name: learncircle_web
+    container_name: learncircle-vue
     ports:
       - "8080:80"
     restart: unless-stopped
     depends_on:
-      - app
+      - node
+      - laravel
 
-  app:
+  node:
     build:
-      context: ../app-node
+      context: ../
       dockerfile: infra/docker/node/prod.Dockerfile   # produção por padrão
-    container_name: learncircle_app
+    container_name: learncircle-node
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
     restart: unless-stopped
   
-  backend:
+  laravel:
     build:
-      context: ../app-laravel
+      context: ../
       dockerfile: infra/docker/laravel/Dockerfile
-    container_name: learncircle-backend
+    container_name: learncircle-laravel
     volumes:
-      - ../laravel:/var/www/html
+      - ./app-laravel:/var/www/html
     environment:
       - DB_HOST=db
-      - DB_PORT=3306
+      - DB_PORT=3308
       - DB_DATABASE=learncircle
       - DB_USERNAME=learncircle
       - DB_PASSWORD=secret
@@ -41,7 +42,6 @@ services:
     depends_on:
       - db
       - redis
-
   db:
     image: mysql:8.0
     container_name: learncircle-db
@@ -54,7 +54,7 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3308:3306"
 
   redis:
     image: redis:7

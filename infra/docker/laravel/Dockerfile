@@ -13,13 +13,13 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 # 5. Copiar apenas composer.* para cache eficiente
-COPY ../../app-laravel/composer.json ../../app-laravel/composer.lock ./
+COPY ./app-laravel/composer.json ./app-laravel/composer.lock ./
 
 # 6. Instalar dependências
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-scripts --no-interaction --no-progress
 
 # 7. Copiar o restante do código
-COPY ../../app-laravel .
+COPY ./app-laravel .
 
 # 8. Dar permissão para storage e bootstrap/cache
 RUN chown -R www-data:www-data storage bootstrap/cache
