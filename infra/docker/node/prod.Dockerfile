@@ -17,4 +17,11 @@ COPY ./app-node .
 EXPOSE 3000
 
 # Comando padrão para produção
-CMD ["node", "src/index.js"]
+# Compila o TypeScript para JavaScript
+RUN npm run build
+
+# Expõe a porta
+EXPOSE 3000
+
+# Comando padrão para produção
+CMD ["node", "dist/app.js"]
