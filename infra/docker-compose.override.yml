@@ -4,7 +4,7 @@ services:
   node:
     build:
       context: ..
-      dockerfile: infra/docker/node/prod.Dockerfile   # usa dev
+      dockerfile: infra/docker/node/dev.Dockerfile   # usa dev
     volumes:
       - ../app-node:/usr/src/app    # monta código local
       - /usr/src/app/node_modules   # evita conflito
