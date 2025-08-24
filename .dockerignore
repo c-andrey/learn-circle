@@ -1,0 +1,62 @@
+# =========================
+# Node.js / Vue / Next.js
+# =========================
+node_modules
+**/node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+.pnpm-store
+dist
+build
+.cache
+.next
+.nuxt
+coverage
+
+# =========================
+# Laravel / PHP
+# =========================
+vendor
+storage/logs
+storage/framework/cache
+storage/framework/sessions
+storage/framework/views
+bootstrap/cache
+
+# =========================
+# Sistema / Geral
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*.log
+
+# =========================
+# Git / Docker
+# =========================
+.git
+.gitignore
+.dockerignore
+docker-compose*.yml
+Dockerfile*
+
+# Ignorar dependências locais
+node_modules
+**/node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Cache
+*.log
+*.lock
+
+# Arquivos temporários
+.DS_Store
+dist
+build
+.cache

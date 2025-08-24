@@ -1,20 +1,19 @@
-# Usa imagem Node.js leve
 FROM node:lts-alpine
 
-# Define diretório de trabalho
+# Instalar pnpm globalmente
+RUN npm install -g pnpm
+
 WORKDIR /usr/src/app
 
-# Copia apenas manifests primeiro
-COPY ./app-node/package*.json ./
+# Copiar arquivos do package.json
+COPY ./app-node/package.json ./app-node/pnpm-lock.yaml* ./
 
-# Instala dependências de produção
-RUN if [ -f package-lock.json ]; then npm ci --only=production; else npm install --omit=dev; fi
+# Instalar dependências de produção
+RUN pnpm install --prod --frozen-lockfile
 
-# Copia o restante do código
+# Copiar o restante do código
 COPY ./app-node .
 
-# Expõe a porta
 EXPOSE 3000
 
-# Comando padrão para produção
-CMD ["node", "src/index.js"]
+CMD ["pnpm", "start"]

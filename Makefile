@@ -1,6 +1,6 @@
 PROJECT_NAME=learncircle
 DOCKER_COMPOSE=docker compose
-OVERRIDE=-f infra/docker-compose.yml -f infra/docker-compose.override.yml
+OVERRIDE=-f infra/docker-compose.yml -f infra/docker-compose.dev.yml
 
 # ---- COMANDOS ----
 
@@ -31,3 +31,11 @@ shell-web:
 ## Reconstrói containers sem cache
 rebuild:
 	$(DOCKER_COMPOSE) $(OVERRIDE) build --no-cache	
+
+## Sobe containers em desenvolvimento sem buildar novamente
+dev-no-build:
+	$(DOCKER_COMPOSE) $(OVERRIDE) up -d
+
+## Sobe containers em produção sem buildar novamente
+prod-no-build:
+	$(DOCKER_COMPOSE) -f docker-compose.yml up -d
