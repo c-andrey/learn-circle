@@ -6,7 +6,7 @@ WORKDIR /app
 COPY ./app-vue/package*.json ./
 
 # Instalar dependências de produção
-RUN npm install --only=production
+RUN npm install
 
 COPY ./app-vue .
 

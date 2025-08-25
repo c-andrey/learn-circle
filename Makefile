@@ -6,7 +6,7 @@ OVERRIDE=-f infra/docker-compose.yml -f infra/docker-compose.dev.yml
 
 ## Sobe containers em produção
 prod:
-	$(DOCKER_COMPOSE) -f docker-compose.yml up -d --build
+	$(DOCKER_COMPOSE) -f infra/docker-compose.yml up -d --build
 
 ## Sobe containers em desenvolvimento
 dev:
@@ -14,7 +14,7 @@ dev:
 
 ## Para containers (funciona tanto dev quanto prod)
 down:
-	$(DOCKER_COMPOSE) $(OVERRIDE) down || $(DOCKER_COMPOSE) -f docker-compose.yml down
+	$(DOCKER_COMPOSE) $(OVERRIDE) down || $(DOCKER_COMPOSE) -f infra/docker-compose.yml down
 
 ## Mostra logs (em dev por padrão)
 logs:
@@ -38,4 +38,4 @@ dev-no-build:
 
 ## Sobe containers em produção sem buildar novamente
 prod-no-build:
-	$(DOCKER_COMPOSE) -f docker-compose.yml up -d
+	$(DOCKER_COMPOSE) -f infra/docker-compose.yml up -d

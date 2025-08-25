@@ -34,8 +34,6 @@ services:
       dockerfile: infra/docker/vue/prod.Dockerfile
     container_name: learncircle-vue
     restart: unless-stopped
-    ports:
-      - "4173:4173"
     depends_on:
       - laravel
       - node
@@ -60,7 +58,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./infra/nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - laravel
       - node
