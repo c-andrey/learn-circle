@@ -3,6 +3,7 @@ services:
     build:
       context: ..
       dockerfile: infra/docker/laravel/dev.Dockerfile
+    user: "${UID:-1000}:${GID:-1000}"   # roda como seu usuário
     volumes:
       - ../app-laravel:/var/www/html
       - /var/www/html/vendor
@@ -15,7 +16,6 @@ services:
       DB_DATABASE: learncircle
       DB_USERNAME: user
       DB_PASSWORD: pass
-    # entrypoint já chama migrate e depois roda o comando
     command: ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 
   node:
@@ -43,6 +43,8 @@ services:
     container_name: learncircle-nginx-dev
     volumes:
       - ./infra/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 8080:80
     depends_on:
       - laravel
       - node
