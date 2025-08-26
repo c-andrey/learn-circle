@@ -1,2 +1,3 @@
-# recipe-gaming
-An application to manage recipes
+# learn-circle
+An application to manage study plans
+
